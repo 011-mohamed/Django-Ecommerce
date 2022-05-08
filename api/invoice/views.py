@@ -1,4 +1,5 @@
 from asyncio.windows_events import NULL
+from tokenize import Number, String
 from api.invoice.models import Invoice
 from api.invoice.serializers import InvoiceSerializer
 from api.order.models import Order
@@ -56,8 +57,10 @@ def addBill(request):
         
     bill = Invoice.objects.create(
         billId = billid,
-        order = orderFDB
-        
+        order = orderFDB,
+        customerFirstName = customer.firstName,
+        customerLastName = customer.lastName,
+        customerPhoneNumber = customer.phoneNumber,
     )
     serializer = InvoiceSerializer(bill, many=False)
     
@@ -71,3 +74,35 @@ def getBills(request):
     serailizer = InvoiceSerializer(queryset , many=True, context={"request": request})
        
     return Response(serailizer.data )
+
+
+@api_view(['GET'])
+def getBillssFiltredByName(request, keyword):
+    if keyword == None: 
+        keyword = ''
+    
+    queryset = Invoice.objects.filter(customerFirstName__icontains=keyword)
+    serailizer = InvoiceSerializer(queryset , many=True, context={"request": request})
+       
+    return Response(serailizer.data )
+
+@api_view(['GET'])
+def getBillssFiltredByPhoneNumber(request, keyword):
+    if keyword == None: 
+        keyword = NULL
+    
+    queryset = Invoice.objects.filter(customerPhoneNumber__icontains=keyword)
+    serailizer = InvoiceSerializer(queryset , many=True, context={"request": request})
+       
+    return Response(serailizer.data )
+
+
+@api_view(['GET'])
+def getBillsOrderByDate(request):
+        
+    queryset = Invoice.objects.order_by('-created_at')
+    serailizer = InvoiceSerializer(queryset , many=True, context={"request": request})
+       
+    return Response(serailizer.data )
+
+

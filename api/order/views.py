@@ -41,6 +41,7 @@ def addOrderItems(request):
     fn =c.get("firstName")
     ln =  c.get("lastName")
     cp = c.get("company")
+    
 
     
     

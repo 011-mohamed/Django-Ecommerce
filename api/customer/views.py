@@ -23,8 +23,8 @@ def getCustomer(request, pk):
 
 @api_view(['GET'])
 def getCustomersByPhoneNumber(request ,  tel):
-    query = Customer.objects.filter(phoneNumber=tel)
-    serailizer = CustomerSerializer(query , many=True)
+    query = Customer.objects.get(phoneNumber=tel)
+    serailizer = CustomerSerializer(query , many=False)
     return Response(serailizer.data )
 
 @api_view(['POST'])
