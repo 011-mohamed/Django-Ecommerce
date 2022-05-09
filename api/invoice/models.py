@@ -10,7 +10,6 @@ class Invoice (models.Model):
     customerFirstName = models.CharField(max_length=50,blank=True, null=True) 
     customerLastName = models.CharField(max_length=50,blank=True, null=True) 
     customerPhoneNumber = models.IntegerField(null= True, blank=True) 
-    
     order = models.OneToOneField(Order,on_delete=models.CASCADE,primary_key=True)
     
     def __str__(self) -> str:

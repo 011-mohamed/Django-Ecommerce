@@ -78,6 +78,25 @@ def updateProduct(request, ck):
     return Response(serailizer.data )
 
 
+@api_view(['POST'])
+def addProduct(request):
+    data = request.data
+    cat = Category.objects.get(id=data.get("categorie"))
+    
+    product = Product.objects.create(
+        name=data['name'],
+        description=data['description'],
+        unitPrice = data['unitPrice'],
+        unitStock =data['unitStock'],
+        image = data['image'],
+        category = cat
+    )
+    
+    serailizer = ProductSerializer(product , many=False)
+       
+    return Response(serailizer.data )
+
+
 
 
 

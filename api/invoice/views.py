@@ -13,10 +13,11 @@ from rest_framework.decorators import parser_classes
 from rest_framework.parsers import JSONParser
 
 # Create your views here.
+
+
 @api_view(['POST'])
 @parser_classes([JSONParser])
 def addBill(request):
-    
     data = request.data
     billid = data.get("billId")
     o = data.get("order")
@@ -61,8 +62,10 @@ def addBill(request):
         customerFirstName = customer.firstName,
         customerLastName = customer.lastName,
         customerPhoneNumber = customer.phoneNumber,
+        
     )
     serializer = InvoiceSerializer(bill, many=False)
+    
     
     return Response(serializer.data)
 
