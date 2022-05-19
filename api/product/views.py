@@ -1,13 +1,18 @@
-from itertools import product
-from math import prod
-from unicodedata import category
+from base64 import b64encode
+from django.core import serializers
+from django.http import JsonResponse
 from api.category.models import Category
+from api.purchase.models import Result
+from api.purchase.serializers import ResultSerilazer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.http import JsonResponse
 from .models import Product
 from .serializers import ProductSerializer
-from api.category import models
+from django.forms.models import model_to_dict
+
+
+import requests
+import json
 
 
 # Create your views here.
@@ -96,6 +101,55 @@ def addProduct(request):
        
     return Response(serailizer.data )
 
+
+
+
+@api_view(['GET'])
+def getProductsOrderByDate(request):
+        
+    queryset = Product.objects.order_by('-created_at')
+    serailizer = ProductSerializer(queryset , many=True, context={"request": request})
+       
+    return Response(serailizer.data )
+
+
+
+
+@api_view(['POST','GET'])
+def addProductByNyckel(request):
+    data = request.data
+    image = data['image']
+    url = 'https://www.nyckel.com/v1/functions/7aaigszss2ejx7t8/invoke'
+    header = {
+    'Content-type': 'application/json', 'Accept': 'text/plain'
+    }
+    
+    urlimg = 'http://127.0.0.1:8000/media/images/chamia_2lJVXBC.jpg'
+   
+
+    img = requests.get(urlimg,params=request.GET)
+    m = img.content
+    #with open('media/images/chamia_2lJVXBC.jpg', 'rb') as f:
+        #result = requests.post(url, headers=header, files={'data': f})
+    result = requests.post(url,m, headers=header)
+    
+    #dt = result.content
+    #json_data = json.loads(result.text)
+    
+   
+    
+    dict = result.json() 
+    
+    labelName= dict.get("labelName"),
+    labelId = dict.get("labelId"),
+    confidence = dict.get("confidence")
+    
+    return Response(dict )
+    
+   
+    
+    
+    
 
 
 

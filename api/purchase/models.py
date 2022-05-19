@@ -1,11 +1,10 @@
 from django.db import models
 
-from api.customer.models import Customer
-from api.order.models import Order
-from api.orderItem.models import OrderItem
 
 # Create your models here.
-class Purchase (models.Model):
-    customer : Customer
-    order : Order
-    orderItems  : OrderItem = [] 
+class Result (models.Model):
+    labelName = models.CharField(max_length=120, blank= True),
+    labelId = models.CharField(max_length=120, blank= True),
+    confidence  = models.DecimalField(
+        max_digits=7, decimal_places=3, null=True, blank=True),
+    labelConfidences =  models.CharField(max_length=120, blank= True)

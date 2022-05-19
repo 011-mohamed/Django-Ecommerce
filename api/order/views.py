@@ -19,7 +19,7 @@ from api.product.models import Product
 from api.order.models import Order
 from api.orderItem.models import OrderItem
 from api.customer.models import Customer
-from api.purchase.models import Purchase
+
 
 
 # Create your views here.

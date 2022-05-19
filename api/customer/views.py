@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
+from asyncio.windows_events import NULL
 from api.customer.models import Customer
 from api.customer.serializers import CustomerSerializer
 
@@ -65,4 +65,34 @@ def updateCustomer(request, pk):
     
     
     serailizer = CustomerSerializer(customer, many=False)
+    return Response(serailizer.data )
+
+
+@api_view(['GET'])
+def getCustomersFiltredByName(request, keyword):
+    if keyword == None: 
+        keyword = ''
+    
+    queryset = Customer.objects.filter(firstName__icontains=keyword)
+    serailizer = CustomerSerializer(queryset , many=True, context={"request": request})
+       
+    return Response(serailizer.data )
+
+@api_view(['GET'])
+def getCustomersFiltredByPhoneNumber(request, keyword):
+    if keyword == None: 
+        keyword = NULL
+    
+    queryset = Customer.objects.filter(phoneNumber__icontains=keyword)
+    serailizer = CustomerSerializer(queryset , many=True, context={"request": request})
+       
+    return Response(serailizer.data )
+
+
+@api_view(['GET'])
+def getCustomersOrderByDate(request):
+        
+    queryset = Customer.objects.order_by('-created_at')
+    serailizer = CustomerSerializer(queryset , many=True, context={"request": request})
+       
     return Response(serailizer.data )

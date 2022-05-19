@@ -3,6 +3,8 @@ from unicodedata import name
 from django.urls import path , include 
 from rest_framework import views
 from .views import home
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home , name='api.home'),
@@ -12,4 +14,6 @@ urlpatterns = [
     path('orderItem/', include('api.orderItem.urls')),
     path('customers/', include('api.customer.urls')),
     path('bills/', include('api.invoice.urls'))
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+                         
