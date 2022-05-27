@@ -18,7 +18,6 @@ urlpatterns = [
     path('delete/<str:pk>', views.deleteProduct, name="product-delete"),
     path('update/<str:ck>', views.updateProduct, name="product-update"),
     path('add', views.addProduct, name="product-add"),
-    path('NyckelAdd', views.addProductByNyckel, name="product-add-By-Nyckel"),
     path('findByCategory/<str:ck>/', views.getProductByCategory, name='product-category'),
     
 ]

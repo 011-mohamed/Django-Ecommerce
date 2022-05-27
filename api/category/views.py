@@ -32,8 +32,8 @@ def createCategory(request):
     data = request.data
     
     category = Category.objects.create(
-        name=data['name'],
-        description=data['description']
+        name=data.get("name"),
+        description=data.get("description")
         
     )
     

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'api.orderItem',
     'api.customer',
     'api.invoice',
+    'api.imagesProduct',
     
 ]
 
