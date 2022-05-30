@@ -13,7 +13,8 @@ urlpatterns = [
     path('order/', include('api.order.urls')),
     path('orderItem/', include('api.orderItem.urls')),
     path('customers/', include('api.customer.urls')),
-    path('bills/', include('api.invoice.urls'))
+    path('bills/', include('api.invoice.urls')),
+    path('imagesProduct/', include('api.imagesProduct.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
                          

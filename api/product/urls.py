@@ -19,5 +19,5 @@ urlpatterns = [
     path('update/<str:ck>', views.updateProduct, name="product-update"),
     path('add', views.addProduct, name="product-add"),
     path('findByCategory/<str:ck>/', views.getProductByCategory, name='product-category'),
-    
+    path('count', views.getCountOfProducts, name="product-count"),
 ]

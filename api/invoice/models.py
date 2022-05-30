@@ -11,6 +11,8 @@ class Invoice (models.Model):
     customerLastName = models.CharField(max_length=50,blank=True, null=True) 
     customerPhoneNumber = models.IntegerField(null= True, blank=True) 
     order = models.OneToOneField(Order,on_delete=models.CASCADE,primary_key=True)
+    totalPrice = models.DecimalField(
+        max_digits=12, decimal_places=3, null=True, blank=True)
     
     def __str__(self) -> str:
         return self.billId 

@@ -68,3 +68,12 @@ def updateCategory(request, pk):
     serailizer = CategorySerializer(category, many=False)
     return Response(serailizer.data )
 
+
+@api_view(['GET'])
+def getCountOfCategory(request):
+        
+    queryset = Category.objects.all().count()
+    context= {'count': queryset}
+       
+    return Response(context )
+

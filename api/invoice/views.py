@@ -1,5 +1,5 @@
 from asyncio.windows_events import NULL
-from tokenize import Number, String
+from django.db.models import Sum
 from api.invoice.models import Invoice
 from api.invoice.serializers import InvoiceSerializer
 from api.order.models import Order
@@ -62,6 +62,8 @@ def addBill(request):
         customerFirstName = customer.firstName,
         customerLastName = customer.lastName,
         customerPhoneNumber = customer.phoneNumber,
+        totalPrice  = orderFDB.totalPrice
+        
         
     )
     serializer = InvoiceSerializer(bill, many=False)
@@ -108,4 +110,23 @@ def getBillsOrderByDate(request):
        
     return Response(serailizer.data )
 
+
+
+@api_view(['GET'])
+def getCountOfBills(request):
+        
+    queryset =  Invoice.objects.all().count()
+    context= {'count': queryset}
+       
+    return Response(context )
+
+
+
+@api_view(['GET'])
+def sumOfBills(request):
+    result = Invoice.objects.values('created_at__year','created_at__month').order_by('created_at__year','created_at__month').annotate(total_price=Sum('totalPrice'))
+    context= {'count': result}
+    
+    return Response(context )
+    
 

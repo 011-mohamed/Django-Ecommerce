@@ -13,6 +13,7 @@ urlpatterns = [
     path('order', views.getBillsOrderByDate, name="invoice-list-order"),
     path('create/', views.addBill, name="invoice-create"),
     path('search/<str:keyword>', views.getBillssFiltredByName, name='invoice-filtred-Name'),
-    path('searchByPhone/<str:keyword>', views.getBillssFiltredByPhoneNumber, name='products-filter-PhoneNumber')
-    
+    path('searchByPhone/<str:keyword>', views.getBillssFiltredByPhoneNumber, name='products-filter-PhoneNumber'),
+    path('billsCount', views.getCountOfBills, name="invoice-count"),
+    path('sumPerMonth', views.sumOfBills, name="invoice-sum"),
 ]

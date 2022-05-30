@@ -96,3 +96,14 @@ def getCustomersOrderByDate(request):
     serailizer = CustomerSerializer(queryset , many=True, context={"request": request})
        
     return Response(serailizer.data )
+
+
+
+@api_view(['GET'])
+def getCountOfCustomers(request):
+        
+    queryset = Customer.objects.all().count()
+    context= {'count': queryset}
+       
+    return Response(context )
+

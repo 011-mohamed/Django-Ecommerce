@@ -113,6 +113,16 @@ def getProductsOrderByDate(request):
     return Response(serailizer.data )
 
 
+@api_view(['GET'])
+def getCountOfProducts(request):
+        
+    queryset = Product.objects.all().count()
+    context= {'count': queryset}
+       
+    return Response(context )
+
+
+
 
 
 

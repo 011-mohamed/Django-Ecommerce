@@ -13,4 +13,5 @@ urlpatterns = [
     path('create/', views.createCustomer, name="customer-create "),
     path('delete/<str:pk>', views.deleteCustomer, name="customer-delete"),
     path('<str:pk>/', views.getCustomer, name="customer"),
+    path('customersCount', views.getCountOfCustomers, name="customer-count "),
 ]

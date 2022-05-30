@@ -13,5 +13,6 @@ urlpatterns = [
     path('create', views.createCategory, name="category-create "),
     path('delete/<str:pk>', views.deleteCategory, name="category-delete"),
     path('update/<str:pk>', views.updateCategory, name="category-updated"),
+    path('categoryCount', views.getCountOfCategory, name="category-count"),
     
 ]
