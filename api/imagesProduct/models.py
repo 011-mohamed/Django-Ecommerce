@@ -9,6 +9,6 @@ class ImagesProduct(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+    reference = models.CharField(max_length=255,blank=True, null=True)
     def __str__(self) -> str:
         return str(self.product)

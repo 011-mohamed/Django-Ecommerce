@@ -124,6 +124,12 @@ def getCountOfProducts(request):
 
 
 
+@api_view(['GET','PUT'])
+def getProductByRef(request, sampleId):
+    queryset = Product.objects.get(reference=sampleId)
+    serailizer = ProductSerializer(queryset, many=False, context={"request": request})
+    return Response(serailizer.data )
+
 
 
 

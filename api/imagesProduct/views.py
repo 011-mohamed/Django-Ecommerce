@@ -22,3 +22,14 @@ def getImagesProductById(request,ck):
     serailizer = ImagesProductSerializer(queryset , many=True, context={"request": request})
        
     return Response(serailizer.data )
+
+
+
+@api_view(['GET'])
+def getIdProductByRef(request,ref):
+        
+    queryset = ImagesProduct.objects.filter(reference=ref)
+    serailizer = ImagesProductSerializer(queryset , many=True, context={"request": request})
+       
+    return Response(serailizer.data )
+

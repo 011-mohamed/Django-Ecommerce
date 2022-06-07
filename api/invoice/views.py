@@ -125,8 +125,8 @@ def getCountOfBills(request):
 @api_view(['GET'])
 def sumOfBills(request):
     result = Invoice.objects.values('created_at__year','created_at__month').order_by('created_at__year','created_at__month').annotate(total_price=Sum('totalPrice'))
-    context= {'count': result}
+    context= result 
     
-    return Response(context )
+    return Response(context)
     
 
