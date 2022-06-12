@@ -13,6 +13,7 @@ urlpatterns = [
     path('', views.getProducts, name='products'),
     path('<str:pk>/', views.getProduct, name="product-detail"),
     
+    path('getProductWithLowqty', views.getProductWithLowQty, name="product-With-lowQty"),
     path('getProductByRef/<str:sampleId>', views.getProductByRef, name="product-detail"),
     path('orderByDate', views.getProductsOrderByDate, name="product-list-ordered"),
     path('search/<str:keyword>', views.getProductsFiltred, name='products-filter'),

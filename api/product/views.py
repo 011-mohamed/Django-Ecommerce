@@ -132,6 +132,16 @@ def getProductByRef(request, sampleId):
 
 
 
+@api_view(['GET','PUT'])
+def getProductWithLowQty(request):
+    queryset = Product.objects.filter(unitStock__lte= 10 )
+    serailizer = ProductSerializer(queryset, many=True, context={"request": request})
+    return Response(serailizer.data )
+
+
+
+
+
 
 
 
